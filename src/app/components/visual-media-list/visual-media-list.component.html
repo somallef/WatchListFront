@@ -1,0 +1,10 @@
+<ol class="list-unstyled">
+    <li *ngFor="let cols of _posters" class="row no-gutters p-0">
+        <div *ngFor="let poster of cols" class="col-4">                   
+            <app-poster
+                [url]="poster.url" 
+                [description]="poster.description"
+            />
+        </div>
+    </li>
+</ol>
