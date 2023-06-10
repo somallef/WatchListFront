@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'WatchListFront';
+
+  posters: any[] = Array.from({ length: 100 }, (_, index) => ({
+    url: `http://lorempixel.com.br/200/300?index=${index}`,
+    description: ""
+  }));
 }
