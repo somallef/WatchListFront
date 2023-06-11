@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TMDBService } from 'src/app/services/tmdb.service';
 
 @Component({
   selector: 'app-visual-media-list',
@@ -7,25 +8,37 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class VisualMediaListComponent implements OnInit {
 
-  _posters: any[] = [];
-  @Input() posters: any[] = [];
-  @Input() countCols: number = 1;
+  hasMore: boolean = true;
+  currentPage: number = 1;
+  visualMedias: any[] = [];
+  filter: string = '';
 
-  constructor() {
+  constructor(private tmdbService: TMDBService) { }
+
+  ngOnInit(): void {
     
   }
-  ngOnInit(): void {
-    this._posters = this.groupColumns(this.posters);
+
+  onSearchQueryChanged(query: string): void {
+
+    this.filter = query;
+
+    if(this.filter) {
+      this.tmdbService.searchByTitle(this.filter).subscribe(tmdbResult => {
+        this.visualMedias = tmdbResult.results;
+        this.currentPage = tmdbResult.page;
+        this.hasMore = !(this.currentPage === tmdbResult.total_pages);
+      })
+    } else {
+      this.visualMedias = [];
+    }
   }
 
-  groupColumns(posters: any[]) {
-
-    const newRows = [];
-
-    for(let index = 0; index < posters.length; index+=this.countCols) {
-      newRows.push(posters.slice(index, index + this.countCols));
-    }                            
-    return newRows;
+  loadMore() {
+    this.tmdbService.searchByTitle(this.filter, ++this.currentPage).subscribe(tmdbResult => {
+      this.visualMedias = this.visualMedias.concat(tmdbResult.results);
+      this.hasMore = !(this.currentPage === tmdbResult.total_pages);
+    })
   }
 
 }

@@ -1,0 +1,11 @@
+<section class="container mt-3 justify-content-center">
+
+    <ol class="list-unstyled">
+        <li *ngFor="let cols of rows" class="row no-gutters p-0">
+            <div *ngFor="let vm of cols" class="col-4">                   
+                <app-visual-media [visualMedia]="vm" />
+            </div>
+        </li>
+    </ol>
+    
+</section>

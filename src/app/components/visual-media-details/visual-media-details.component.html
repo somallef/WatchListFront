@@ -1,0 +1,80 @@
+<h3>
+    {{ mediaType === 'tv' ? visualMedia.name : visualMedia.title }}
+    <small class="text-muted">{{ mediaType === 'tv' ? visualMedia.original_name : visualMedia.original_title }}</small>
+    <span class="badge badge-pill badge-info ml-2" *ngIf="mediaType === 'movie'">{{visualMedia.release_date | date: "yyyy"}}</span>    
+</h3>
+
+<h6><span class="badge badge-pill badge-primary ml-1" *ngFor="let genre of visualMedia.genres">{{genre.name}}</span></h6>
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="{{ tmdbUrlImages + visualMedia.poster_path }}" class="rounded float-left" alt="...">
+    </div>
+    <div class="col-md-8">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Sinopse
+                  </button>
+                </h2>
+              </div>
+          
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    {{ visualMedia.overview }}
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Produção
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div *ngIf="mediaType === 'tv'">
+                        <p>Criado por:</p>
+                        <ul>
+                            <li *ngFor="let creator of visualMedia.created_by"> {{ creator.name }}</li>
+                        </ul> 
+                        
+                        <p>Temporadas: {{ visualMedia.number_of_seasons }}</p> 
+                        <p>Episódios: {{ visualMedia.number_of_episodes }}</p>
+                    </div>
+
+                    <div *ngIf="mediaType === 'movie'">
+
+                        <p>Orçamento: {{ visualMedia.budget | currency }}</p>
+                        <p>Data de lançamento: {{ visualMedia.release_date | date }}</p>
+                        
+                    </div>
+               
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingThree">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Resenhas
+                  </button>
+                </h2>
+              </div>
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                <div class="card-body">
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    
+</div>
+
+

@@ -1,0 +1,21 @@
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-5">
+      <img src="{{tmdbUrlImages + visualMedia.poster_path}}" class="card-img" [alt]="visualMedia.title">
+    </div>
+    <div class="col-md-7">
+      <div class="card-body">
+        <h6 class="card-title line-clamp1">{{ visualMedia.media_type === 'tv' ? visualMedia.name : visualMedia.title}}</h6>
+        <p class="card-text">
+          <small class="text-muted" *ngIf="visualMedia.media_type === 'movie'">{{visualMedia.release_date | date: 'yyyy'}}</small>
+          <small class="text-muted" *ngIf="visualMedia.media_type === 'tv'">{{visualMedia.first_air_date | date: 'yyyy'}}</small>
+          <span class="badge badge-pill badge-info ml-2" >{{visualMedia.media_type === 'tv' ? "Série" : "Filme"}}</span>
+        </p>
+        <p class="card-text line-clamp3">{{visualMedia.overview}}</p>
+        <a [routerLink]="['/detail', visualMedia.media_type, visualMedia.id]" class="btn btn-primary">Ver detalhes</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
