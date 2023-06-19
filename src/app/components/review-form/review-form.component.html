@@ -1,0 +1,42 @@
+<form [formGroup]="reviewForm"  (submit)="saveReview()">
+
+  <input type="hidden" id="reviewDate" formControlName="reviewDate" />
+
+  <div class="form-group">
+    <label for="name">Seu nome</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+    <small class="font-weight-light text-danger" *ngIf="reviewForm.get('name')?.errors?.['minlength']">
+      Este campo deve ter ao menos 3 caracteres!
+    </small>   
+  </div>
+
+  <div class="form-group">
+    <label for="reviewTitle">Título da sua resenha</label>
+    <input type="text" class="form-control" id="reviewTitle" formControlName="reviewTitle">
+    <small class="font-weight-light text-danger" *ngIf="reviewForm.get('reviewTitle')?.errors?.['minlength']">
+      Este campo deve ter ao menos 3 caracteres!
+    </small>
+  </div>
+
+  <div class="form-group">
+    <label for="review">O que você tem a dizer sobre este filme?</label>
+    <textarea class="form-control" id="review" rows="3" formControlName="review"></textarea>
+    <small class="font-weight-light text-danger" *ngIf="reviewForm.get('review')?.errors?.['minlength']">
+      Este campo deve ter ao menos 30 caracteres!
+    </small>
+  </div>
+
+  <button [disabled]="reviewForm.invalid" type="submit" class="btn btn-primary mb-2">Comentar</button>
+
+</form>
+
+<div class="list-group" *ngIf="(reviews$ | async) as reviews">
+  <a class="list-group-item list-group-item-action" *ngFor="let review of reviews">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ review.reviewTitle }}</h5>
+      <small>{{ review.reviewDate | date:'dd-MM-yyyy HH:mm' }}</small>
+    </div>
+    <p class="mb-1">{{ review.review }}</p>
+    <small>por {{ review.name }}</small>
+  </a>
+</div>

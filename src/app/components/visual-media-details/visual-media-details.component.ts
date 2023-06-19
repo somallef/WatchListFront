@@ -12,17 +12,18 @@ export class VisualMediaDetailsComponent implements OnInit {
 
   visualMedia: any = {};
   tmdbUrlImages: string = environment.tmdbUrlImages + "w342/";
-  mediaType: string = '';
+  visualMediaType: string = '';
+  visualMediaId: string = '';
 
   constructor(private route: ActivatedRoute, private tmdbService: TMDBService) { }
 
   ngOnInit() {
 
     const routeParams = this.route.snapshot.paramMap;
-    const id = routeParams.get('id') ?? '';
-    this.mediaType = routeParams.get('mediaType') ?? '';
+    this.visualMediaId = routeParams.get('id') ?? '';
+    this.visualMediaType = routeParams.get('mediaType') ?? '';
 
-    this.tmdbService.searchById(id, this.mediaType).subscribe(tmdbResult => {
+    this.tmdbService.searchById(this.visualMediaId, this.visualMediaType).subscribe(tmdbResult => {
       this.visualMedia = tmdbResult;
 
       console.log(this.visualMedia)

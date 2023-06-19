@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoadButtonComponent } from './components/visual-media-list/load-button/load-button.component';
 import { VisualMediasComponent } from './components/visual-media-list/visual-medias/visual-medias.component';
 import { VisualMediaDetailsComponent } from './components/visual-media-details/visual-media-details.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VisualMediaDetailsComponent } from './components/visual-media-details/v
     SearchComponent,
     LoadButtonComponent,
     VisualMediasComponent,
-    VisualMediaDetailsComponent
+    VisualMediaDetailsComponent,
+    ReviewFormComponent
   ],
   imports: [
     BrowserModule,
