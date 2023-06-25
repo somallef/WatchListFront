@@ -25,8 +25,6 @@ export class VisualMediaDetailsComponent implements OnInit {
 
     this.tmdbService.searchById(this.visualMediaId, this.visualMediaType).subscribe(tmdbResult => {
       this.visualMedia = tmdbResult;
-
-      console.log(this.visualMedia)
     })
 
   }

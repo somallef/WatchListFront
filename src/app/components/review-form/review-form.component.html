@@ -1,5 +1,7 @@
 <form [formGroup]="reviewForm"  (submit)="saveReview()">
 
+  <input type="hidden" id="visualMediaType" formControlName="visualMediaType" />
+  <input type="hidden" id="visualMediaId" formControlName="visualMediaId" />  
   <input type="hidden" id="reviewDate" formControlName="reviewDate" />
 
   <div class="form-group">

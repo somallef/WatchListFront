@@ -1,49 +1,45 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment.development';
+
+const JSON_SERVER_URL = environment.jsonServerUrl
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
 
-  private storage: Storage = window.localStorage;
+  constructor(private http: HttpClient) { }
 
-  constructor() { }
+  addReview(review: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.http.post(JSON_SERVER_URL + "reviews", review)
+        .subscribe({
+          next: (response: any) => {
+            resolve(response);
+          },
+          error: (err: any) => {
+            reject(err);
+          }
 
-  setReview(visualMediaType: string, visualMediaId: string, review: any) {
-
-    let reviews: any = this.storage.getItem(visualMediaType);
-
-    if (reviews) {
-      reviews = JSON.parse(reviews);
-    } else {
-      reviews = {}
-    }
-
-    if (visualMediaId in reviews && Array.isArray(reviews[visualMediaId])) {
-      reviews[visualMediaId].push(review);
-    } else {
-      reviews[visualMediaId] = [review];
-    }    
-
-    this.storage.setItem(visualMediaType, JSON.stringify(reviews));
-
-    return of(null);
-  }
+        });
+    });
+  } 
 
   getReviews(visualMediaType: string, visualMediaId: string): Observable<any> {
 
-    let reviews: any = this.storage.getItem(visualMediaType);
-
-    if (reviews) {
-      reviews = JSON.parse(reviews);
-      if(visualMediaId in reviews) {
-        reviews[visualMediaId].sort((a: any, b: any) => b.reviewDate.localeCompare(a.reviewDate));
-        return of(reviews[visualMediaId]);
-      }          
-    } 
-
-    return of(null);
+    const params = new HttpParams()
+            .append('visualMediaType', visualMediaType)
+            .append('visualMediaId', visualMediaId);
+    
+    return this.http.get<any>(JSON_SERVER_URL + "reviews", { params })
+    .pipe(
+      map(response => {
+        response.sort((a: any, b: any) => new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime());
+        return response;
+      })
+    );
 
   }
 }

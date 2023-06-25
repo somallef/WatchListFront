@@ -1,6 +1,6 @@
 # WatchListFront
 
-Este projeto tem como objetivo implementar progressivamente e de forma didática uma aplicação web para uma lista de filmes/séries que se deseja assistir.
+Este projeto tem como objetivo implementar progressivamente e de forma didática uma aplicação web para pesquisar filmes/séries e adicionar críticas/resenhas às páginas destas obras.
 
 O frontend da aplicação foi desenvolvido com Angular v16 e o backend faz uso da API pública do TMDB.
 
@@ -24,10 +24,10 @@ O frontend da aplicação foi desenvolvido com Angular v16 e o backend faz uso d
 - [x] Mapear componentes à rotas no módulo de rotas.
 - [x] Criar navegação entre páginas por meio de rotas.
 - [x] Passar dados entre componentes que representam diferentes telas via parâmetros de rotas.
-- [ ] Validar campos do formulário com REGEX e apresentar os erros.
-- [ ] Desabilitar o botão de submit enquanto o formulário está inválido.
+- [x] Validar campos do formulário com REGEX e apresentar os erros.
+- [x] Desabilitar o botão de submit enquanto o formulário está inválido.
 - [x] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
-- [ ] Cadastrar uma entidade no JSON Server.
+- [x] Cadastrar uma entidade no JSON Server.
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
@@ -38,4 +38,4 @@ O frontend da aplicação foi desenvolvido com Angular v16 e o backend faz uso d
 - Fazer checkout no branch `develop` que contém as modificações mais recentes
 - Abrir o projeto no editor Visual Studio Code (VS Code)
 - Abrir um novo terminal pelo VSCode e então executar o projeto Angular
-  - Comando: `ng s`
+  - Comando: `ng s -o`

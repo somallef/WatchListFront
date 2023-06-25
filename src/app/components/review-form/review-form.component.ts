@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, switchMap, tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
@@ -19,15 +19,21 @@ export class ReviewFormComponent implements OnInit {
   
   ngOnInit(): void {
     this.reviewForm = this.formBuilder.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      visualMediaType: [this.visualMediaType, Validators.required],
+      visualMediaId: [this.visualMediaId, Validators.required],
+      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern("^[a-zA-Z]+ [a-zA-Z]+$")])],
       review: ['', Validators.compose([Validators.required, Validators.minLength(30)])],
       reviewTitle: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       reviewDate: [new Date(), Validators.required]
 
     })
 
-    this.reviews$ = this.reviewService.getReviews(this.visualMediaType, this.visualMediaId);
+    this.loadReviews();
 
+  }
+
+  loadReviews() {
+    this.reviews$ = this.reviewService.getReviews(this.visualMediaType, this.visualMediaId);
   }
 
   saveReview() {
@@ -36,11 +42,15 @@ export class ReviewFormComponent implements OnInit {
       
       const review = this.reviewForm.getRawValue();
 
-      this.reviews$ = this.reviewService.setReview(this.visualMediaType, this.visualMediaId, review)
-            .pipe(switchMap(() => this.reviewService.getReviews(this.visualMediaType, this.visualMediaId)))
-            .pipe(tap(() => {
-                this.reviewForm.reset()
-      }))
+      this.reviewService.addReview(review)
+        .then(response => {
+          this.loadReviews();
+          this.reviewForm.reset();
+          console.log('Review adicionada', response);
+        })
+        .catch(error => {
+          console.error('Não foi possível adicionar a review', error);
+        });
 
     }
     
