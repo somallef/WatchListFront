@@ -23,7 +23,7 @@ export class VisualMediaListComponent implements OnInit {
 
     this.filter = query;
 
-    if(this.filter) {
+    if(this.filter.length > 3) {
       this.tmdbService.searchByTitle(this.filter).subscribe(tmdbResult => {
         this.visualMedias = tmdbResult.results;
         this.currentPage = tmdbResult.page;

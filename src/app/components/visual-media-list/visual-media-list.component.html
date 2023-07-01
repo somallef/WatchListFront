@@ -1,3 +1,9 @@
+
 <app-search placeholder="pesquise por filmes ou séries..." (onTyping)="onSearchQueryChanged($event)" />
-<app-visual-medias [visualMedias]="visualMedias" />
-<app-load-button (click)="loadMore()" [hasMore]="hasMore" *ngIf="visualMedias.length" />
+
+<section *ngIf="visualMedias.length">
+    <app-visual-medias [visualMedias]="visualMedias" />
+    <app-load-button (click)="loadMore()" [hasMore]="hasMore"  />
+</section>
+
+<p class="text-center text-muted" *ngIf="filter.length && visualMedias.length === 0">Nenhum resultado encontrado</p>

@@ -1,11 +1,13 @@
-i {
-    font-size: 1rem;
-    color: #333;
-    top: .75rem;
-    left: .75rem
-}
+.container-flex {
+    display: flex;
+    justify-content: safe center ; /* alinha em relação ao eixo principal */
+    align-items: safe center ;   /*alinha em relação ao eixo transversal */
+    height: 80vh;
+    transition: height 0.3s;
+    flex-direction: column; /* define a direção do eixo principal */
+  }
 
-input {
-    padding-left: 2.5rem;
-}
-
+  
+  .container-flex-10  {
+    height: 10vh;  
+  }
