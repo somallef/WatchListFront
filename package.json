@@ -4,10 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href=/WatchListFront/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "json:server": "json-server --watch db.json"
+    "json:server": "json-server --watch db.json",
+    "ghpages": "angular-cli-ghpages --dir=dist/watch-list-front",
+    "deploy": "npm run build && npm run ghpages"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +21,7 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "angular-cli-ghpages": "^1.0.6",
     "bootstrap": "^4.6.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.7.0",

@@ -6,7 +6,7 @@ O frontend da aplicação foi desenvolvido com Angular v16 e o backend faz uso d
 
 ## Endereço de Deploy - GitHub Pages
 
-(a definir)
+https://somallef.github.io/WatchListFront/
 
 ## Protótipo
 
@@ -31,7 +31,7 @@ O frontend da aplicação foi desenvolvido com Angular v16 e o backend faz uso d
 - [x] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [x] Usar a diretiva ngIf
 - [x] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [x] Build e deploy da aplicação.
 
 ## Manual de execução
 - Clonar o repositório com `git clone`
